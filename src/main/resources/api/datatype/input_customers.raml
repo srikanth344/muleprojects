@@ -1,0 +1,67 @@
+#%RAML 1.0 DataType
+type: object
+properties:
+  Id:
+    type: string
+    required: true
+    minLength: 3
+    maxLength: 4
+  customerNumber:
+    type: number
+    required: true  
+  customerName: 
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 16
+  contactLastName:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 16
+  contactFirstName:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 16
+  Phone:
+    required: true
+    type: number
+  addressLine1:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 20
+  addressLine2:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 20
+  city:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 16
+  state:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 20
+  postalCode:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 20
+  country:
+    type: string
+    required: true
+    minLength: 10
+    maxLength: 16
+  salesRepEmployeeNumber:
+    type: number
+    required: true
+  creditLimit:
+    type: integer
+    required: true
+    minimum: 10
+    maximum: 20

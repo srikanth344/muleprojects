@@ -1,0 +1,36 @@
+#%RAML 1.0
+title: customers-sapi
+version: 1.0
+types: 
+ datatype: !include datatype/input_customers.raml
+baseUri: http://localhost:8081/api
+
+/customers:
+  get:
+    responses:
+      200:
+        description: returns all the customer records from customers endpoint
+        body:
+          application/json:
+            type: object
+            examples:
+              output: !include examples/Get_customers.json
+      400:
+        body:
+          application/json:
+            example: !include examples/badrequest.json
+
+  /{Id}:
+    get:
+      responses:
+        200:
+          description: Get all customers details By ID
+          body:
+            application/json:
+              type: object
+              examples:
+                output: !include examples/Get_customers_Id.json
+        400:
+          body:
+            application/json:
+              example: !include examples/badrequest.json

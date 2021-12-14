@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
+	<flow name="customers-idFlow" doc:id="1dc845e8-b4e9-4859-93bd-69e6934f6bad" >
+		<db:select doc:name="Select" doc:id="b85ee90b-3853-49c2-8cc3-7b26b6ce472b" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from customers where customerNumber=:customerNumber]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	customerNumber:vars.Id
+}]]]></db:input-parameters>
+		</db:select>
+		<choice doc:name="Choice" doc:id="8f2e6a14-6dec-4132-b163-3da2eeeb7f85" >
+			<when expression="#[sizeOf(payload)&gt;0]">
+				<ee:transform doc:name="Transform Message" doc:id="734b2383-ffcd-4775-a8c8-36e93fd7043a">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+				<logger level="INFO" doc:name="Logger" doc:id="82f5a684-9e31-4ded-aa3e-b089a27124f2" message="#[payload]" />
+			</when>
+			<otherwise >
+				<raise-error doc:name="Raise error" doc:id="7f41004e-1d16-4e3e-bea2-633bff71ca4e" type="CUST:INVALID_ID" description="Please  enter the valid Id"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="customers-sapi-httpListenerConfig" doc:name="HTTP Listener config" doc:id="5b13efa4-9922-4b1c-b2f2-0dfe0f0dace2" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="eaadc0c1-abd3-4de4-916a-6ab0ac6194ec" name="customers-sapi-config" api="customers-sapi.raml"/>
+	<configuration-properties doc:name="Configuration properties" doc:id="d61785dc-cb5c-4dee-b637-0ee8fba33c5e" file="dev.yaml" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="8838daac-d8fe-48d2-ae28-162910dbfee0" >
+		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" />
+	</db:config>
+	<db:config name="Database_Config1" doc:name="Database Config" doc:id="e6a2e682-efb3-4650-8760-732c43efacf1" >
+		<db:my-sql-connection host="remotemysql.com" port="3304" user="5zXNFznNeP" password="8d3b42Htda" database="5zXNFznNeP" />
+	</db:config>
+	<configuration doc:name="Configuration" doc:id="b6f9a378-83dc-48ba-bd1d-d3cfe98b9d74" defaultErrorHandler-ref="globalError_Handler" />
+</mule>

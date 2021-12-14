@@ -1,0 +1,10 @@
+http:
+  port: "8081"
+  path: "api/*"
+ 
+db:
+  host: "remotemysql.com"
+  port: "3306"
+  user: "5zXNFznNeP"
+  password: "8d3b42Htda"
+  database: "5zXNFznNeP"
