@@ -16,5 +16,4 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
 		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" />
 	</db:config>
 	<configuration doc:name="Configuration" doc:id="b6f9a378-83dc-48ba-bd1d-d3cfe98b9d74" defaultErrorHandler-ref="globalError_Handler" />
-	<api-gateway:autodiscovery apiId="17520926" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="9650c2b7-ad44-499f-9de1-7601d1e05ae8" flowRef="customers-sapi-main" />
 </mule>
